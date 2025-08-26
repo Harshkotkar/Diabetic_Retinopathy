@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetic Retinopathy Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🩺 Diabetic Retinopathy Detection</h1>
+            <p>Upload a retinal image to detect diabetic retinopathy using AI</p>
+            <nav class="nav-links">
+                <a href="{{ url_for('about') }}" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <div class="flash-message error">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="upload-card">
+                <div class="upload-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7,10 12,15 17,10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </div>
+                
+                <h2>Upload Retinal Image</h2>
+                <p>Supported formats: PNG, JPG, JPEG, GIF</p>
+                
+                <form method="POST" enctype="multipart/form-data" class="upload-form">
+                    <div class="file-input-wrapper">
+                        <input type="file" name="image" id="image" accept="image/*" required>
+                        <label for="image" class="file-input-label">
+                            <span class="file-input-text">Choose a file</span>
+                            <span class="file-input-button">Browse</span>
+                        </label>
+                    </div>
+                    
+                    <div class="preview-container" id="preview-container" style="display: none;">
+                        <img id="image-preview" alt="Preview">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span>Analyze Image</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div class="info-section">
+                <h3>About Diabetic Retinopathy</h3>
+                <p>Diabetic retinopathy is a diabetes complication that affects the eyes. It's caused by damage to the blood vessels of the light-sensitive tissue at the back of the eye (retina).</p>
+                
+                <div class="severity-levels">
+                    <h4>Severity Levels:</h4>
+                    <ul>
+                        <li><strong>No DR:</strong> No signs of diabetic retinopathy</li>
+                        <li><strong>Mild:</strong> Small areas of balloon-like swelling</li>
+                        <li><strong>Moderate:</strong> More blood vessels are blocked</li>
+                        <li><strong>Severe:</strong> Many more blood vessels are blocked</li>
+                        <li><strong>Proliferative:</strong> Most severe stage with new blood vessels</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Diabetic Retinopathy Detection. This tool is for educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+        // File input preview functionality
+        document.getElementById('image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const previewContainer = document.getElementById('preview-container');
+            const preview = document.getElementById('image-preview');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        });
+
+        // Update file input label with selected filename
+        document.getElementById('image').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'Choose a file';
+            document.querySelector('.file-input-text').textContent = fileName;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Diabetic Retinopathy Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🩺 Diabetic Retinopathy Detection</h1>
+            <p>About the Application</p>
+        </header>
+
+        <main class="main-content">
+            <div class="info-section">
+                <h2>About This Application</h2>
+                <p>This web application uses artificial intelligence to detect diabetic retinopathy from retinal images. It's designed to provide quick preliminary analysis and educational insights about retinal health.</p>
+                
+                <h3>How It Works</h3>
+                <p>The application uses a deep learning model trained on thousands of retinal images to classify diabetic retinopathy into five stages. When you upload an image, the AI analyzes the patterns and features in the retina to determine the likelihood of diabetic retinopathy.</p>
+                
+                <h3>Technology Stack</h3>
+                <ul>
+                    <li><strong>Backend:</strong> Flask (Python web framework)</li>
+                    <li><strong>AI Model:</strong> TensorFlow/Keras deep learning</li>
+                    <li><strong>Image Processing:</strong> PIL (Python Imaging Library)</li>
+                    <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h2>Understanding Diabetic Retinopathy</h2>
+                <p>Diabetic retinopathy is a diabetes complication that affects the eyes. It's caused by damage to the blood vessels of the light-sensitive tissue at the back of the eye (retina).</p>
+                
+                <h3>Risk Factors</h3>
+                <ul>
+                    <li>Duration of diabetes</li>
+                    <li>Poor blood sugar control</li>
+                    <li>High blood pressure</li>
+                    <li>High cholesterol</li>
+                    <li>Pregnancy</li>
+                    <li>Smoking</li>
+                </ul>
+                
+                <h3>Prevention</h3>
+                <ul>
+                    <li>Regular eye examinations</li>
+                    <li>Good blood sugar control</li>
+                    <li>Blood pressure management</li>
+                    <li>Healthy lifestyle choices</li>
+                    <li>Early detection and treatment</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h2>Medical Disclaimer</h2>
+                <div class="disclaimer">
+                    <p><strong>⚠️ Important Notice:</strong></p>
+                    <ul>
+                        <li>This application is for educational and research purposes only</li>
+                        <li>It should not be used for actual medical diagnosis</li>
+                        <li>Results are not a substitute for professional medical advice</li>
+                        <li>Always consult with qualified healthcare professionals</li>
+                        <li>Regular eye examinations are essential for diabetic patients</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"></path>
+                        <path d="m12 19-7-7 7-7"></path>
+                    </svg>
+                    Back to Analysis
+                </a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Diabetic Retinopathy Detection. This tool is for educational purposes only.</p>
+        </footer>
+    </div>
+</body>
+</html>

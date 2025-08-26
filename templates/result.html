@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - Diabetic Retinopathy Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🩺 Diabetic Retinopathy Detection</h1>
+            <p>Analysis Results</p>
+        </header>
+
+        <main class="main-content">
+            <div class="result-card">
+                <div class="result-header">
+                    <h2>Analysis Complete</h2>
+                    <p>Your retinal image has been analyzed successfully</p>
+                </div>
+
+                <div class="result-content">
+                    <div class="image-section">
+                        <h3>Uploaded Image</h3>
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" alt="Retinal Image" class="result-image">
+                        </div>
+                    </div>
+
+                    <div class="prediction-section">
+                        <h3>Prediction Results</h3>
+                        
+                        <div class="prediction-card {{ 'no-dr' if prediction == 0 else 'mild' if prediction == 1 else 'moderate' if prediction == 2 else 'severe' if prediction == 3 else 'proliferative' }}">
+                            <div class="prediction-header">
+                                <h4>{{ label }}</h4>
+                                <div class="confidence-badge">
+                                    {{ "%.1f"|format(confidence * 100) }}% confidence
+                                </div>
+                            </div>
+                            
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: {{ confidence * 100 }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="severity-info">
+                            {% if prediction == 0 %}
+                                <div class="info-box positive">
+                                    <h5>✅ No Diabetic Retinopathy Detected</h5>
+                                    <p>Your retinal image shows no signs of diabetic retinopathy. Continue with regular eye checkups as recommended by your healthcare provider.</p>
+                                </div>
+                            {% elif prediction == 1 %}
+                                <div class="info-box warning">
+                                    <h5>⚠️ Mild Diabetic Retinopathy</h5>
+                                    <p>Small areas of balloon-like swelling in the tiny blood vessels of the retina have been detected. Regular monitoring is recommended.</p>
+                                </div>
+                            {% elif prediction == 2 %}
+                                <div class="info-box warning">
+                                    <h5>⚠️ Moderate Diabetic Retinopathy</h5>
+                                    <p>More blood vessels are blocked, causing decreased blood supply to areas of the retina. Medical consultation is advised.</p>
+                                </div>
+                            {% elif prediction == 3 %}
+                                <div class="info-box danger">
+                                    <h5>🚨 Severe Diabetic Retinopathy</h5>
+                                    <p>Many more blood vessels are blocked, depriving blood supply to larger areas of the retina. Immediate medical attention is recommended.</p>
+                                </div>
+                            {% else %}
+                                <div class="info-box danger">
+                                    <h5>🚨 Proliferative Diabetic Retinopathy</h5>
+                                    <p>This is the most advanced stage. The retina sends signals for the body to grow new blood vessels, which are fragile and abnormal. Urgent medical care is required.</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5"></path>
+                            <path d="m12 19-7-7 7-7"></path>
+                        </svg>
+                        Analyze Another Image
+                    </a>
+                    
+                    <div class="disclaimer">
+                        <p><strong>Important:</strong> This analysis is for educational purposes only. Always consult with a qualified healthcare professional for medical diagnosis and treatment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Understanding Your Results</h3>
+                <div class="severity-levels">
+                    <h4>Diabetic Retinopathy Stages:</h4>
+                    <ul>
+                        <li><strong>No DR (0):</strong> No signs of diabetic retinopathy</li>
+                        <li><strong>Mild (1):</strong> Small areas of balloon-like swelling</li>
+                        <li><strong>Moderate (2):</strong> More blood vessels are blocked</li>
+                        <li><strong>Severe (3):</strong> Many more blood vessels are blocked</li>
+                        <li><strong>Proliferative (4):</strong> Most severe stage with new blood vessels</li>
+                    </ul>
+                </div>
+                
+                <div class="next-steps">
+                    <h4>Next Steps:</h4>
+                    <ul>
+                        <li>Share these results with your eye doctor</li>
+                        <li>Schedule regular eye examinations</li>
+                        <li>Maintain good blood sugar control</li>
+                        <li>Monitor blood pressure and cholesterol</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Diabetic Retinopathy Detection. This tool is for educational purposes only.</p>
+        </footer>
+    </div>
+</body>
+</html>
